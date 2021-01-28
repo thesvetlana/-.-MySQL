@@ -1,0 +1,42 @@
+INSERT ignore users (email, phone, password_hash) VALUES
+('1@mail.ru', 7900909091, SHA1('1@mail.ru')),
+('2@mail.ru', 7900909092, SHA1('2@mail.ru')),
+('3@mail.ru', 7900909093, SHA1('3@mail.ru'));
+
+INSERT INTO `vk`.`profiles`
+(`users_id`,`firstname`,`lastname`,`birthday`,`gender`,`address`,`created_at`)
+VALUES
+(3, 'firstname', 'lastname', '2000-01-01', 'm',NULL,DEFAULT);
+
+INSERT vk.`profiles` (users_id, firstname, lastname, birthday, gender)  
+	SELECT 18, first_name, last_name, '2000-01-01', 'f'  FROM sakila.actor WHERE actor_id = 1;
+Select * FROM vk.`profiles`;
+
+INSERT vk.users SET
+	id = 3,
+	email = '9@mail.ru',
+    phone = 7908902359,
+    password_hash = SHA1('9@mail.ru');
+SELECT * FROM vk.users ;
+
+SELECT
+email,
+phone,
+password_hash
+FROM vk.users
+WHERE
+	id > 3
+
+UPDATE vk .users SET
+	password_hash = SHA1('12345');
+SELECT * FROM vk.users ;
+
+UPDATE vk.users SET
+	password_hash = SHA1('12346')
+WHERE id = 1;
+SELECT * FROM vk.users ;
+
+DELETE FROM vk.users;
+ALTER TABLE vk.users AUTO_INCREMENT = 1;
+SELECT * FROM vk.users;
+
